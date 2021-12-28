@@ -3,6 +3,11 @@ import jwt from "jsonwebtoken";
 
 import User from "../models/user.model.js";
 import { Errors } from "../utils/constants.js";
+import {
+  getDefaultBackground,
+  getDefaultPot,
+  getDefaultPlant,
+} from "./common.service.js";
 import { stringIsEmptyOrWhiteSpace, isFalsy } from "../utils/helpers.js";
 
 export const logIn = async (email, password) => {
@@ -31,10 +36,23 @@ export const signUp = async (email, name, password) => {
   const existedUser = await User.findOne({ email }).lean();
   if (!!existedUser) throw new Error(Errors.InvalidInformation);
 
+  const defaultPlant = await getDefaultPlant();
+  const defaultPot = await getDefaultPot();
+  const defaultBackground = await getDefaultBackground();
+
+  if (isFalsy([defaultPlant, defaultPot, defaultBackground]))
+    throw new Error(Errors.MissingInformation);
+
   const newUser = new User({
     name,
     email,
     password: passwordHash.generate(password),
+    plants: [defaultPlant._id],
+    pots: [defaultPot._id],
+    backgrounds: [defaultBackground._id],
+    activePlantId: defaultPlant._id,
+    activePotId: defaultPot._id,
+    activeBackgroundId: defaultBackground._id,
   });
 
   await newUser.save();
