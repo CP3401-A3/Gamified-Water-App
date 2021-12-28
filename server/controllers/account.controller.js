@@ -28,3 +28,13 @@ export const getInfo = async (req, res) => {
     res.status(400).send(err.message);
   }
 };
+
+export const getUserPlant = async (req, res) => {
+  try {
+    const { userId } = req;
+    const result = await service.getUserPlant(userId);
+    res.status(200).send(result);
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+};
