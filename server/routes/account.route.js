@@ -8,5 +8,6 @@ accountRoute.post("/logIn", controller.logIn);
 accountRoute.post("/signUp", controller.signUp);
 accountRoute.get("/me", controller.getInfo);
 accountRoute.get("/me/plant", [auth], controller.getUserPlant);
+accountRoute.get("/me/plant/test", [auth], controller.getUserPlant);
 
 export default accountRoute;
