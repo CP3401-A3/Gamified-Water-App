@@ -9,4 +9,5 @@ accountRoute.post("/signUp", controller.signUp);
 accountRoute.get("/me", controller.getInfo);
 accountRoute.get("/me/plant", [auth], controller.getUserPlant);
 
+
 export default accountRoute;
