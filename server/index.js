@@ -3,7 +3,6 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import routes from "./routes/root.js";
-
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URI, { autoIndex: true, autoCreate: true });
