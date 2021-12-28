@@ -38,6 +38,9 @@ const UserSchema = new Schema({
   plants: [{ _id: false, type: String }],
   pots: [{ _id: false, type: String }],
   backgrounds: [{ _id: false, type: String }],
+  activePlantId: { type: String, required: true },
+  activePotId: { type: String, required: true },
+  activeBackgroundId: { type: String, required: true },
   createdAt: {
     type: Number,
     required: true,
