@@ -2,7 +2,10 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import routes from "./routes/root.js";
+
 dotenv.config();
+
 mongoose.connect(process.env.MONGO_URI, { autoIndex: true, autoCreate: true });
 
 const connection = mongoose.connection;
@@ -23,7 +26,7 @@ const corsConfig = {
 app.use(cors(corsConfig));
 
 app.get("/", (req, res) => res.send("Server is running OK"));
-
+app.use("/api", routes);
 app.listen(process.env.PORT, () => {
   console.log("App run on port " + process.env.PORT);
 });
